@@ -16,7 +16,7 @@ class CloudTestCase(unittest.TestCase):
   def tearDown(self):
     app.redis.flushdb()
 
-  def test_index(self):
+  def test_clouds(self):
     tester = app.test_client(self)
 
     response = tester.get('/clouds.json', content_type='application/json')
