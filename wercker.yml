@@ -1,5 +1,6 @@
 box: wercker/python
-service: wercker/redis
+services:
+  - wercker/redis
 build:
     steps:
         - pip-install
