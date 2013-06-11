@@ -25,6 +25,5 @@ class CloudTestCase(unittest.TestCase):
     self.assertEqual(response.data, json.dumps(['Altocumulus', 'Altostratus',
       'Cumulonimbus', 'Nimbostratus']))
 
-
 if __name__ == '__main__':
   unittest.main()
