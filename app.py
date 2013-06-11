@@ -6,14 +6,12 @@ from flask import Response
 from flask import json
 
 app = Flask(__name__)
+app.redis = redis.StrictRedis(host=os.getenv('WERCKER_REDIS_HOST', 'localhost'),
+      port= 6379, db=0)
 
 @app.route("/clouds.json")
 def clouds():
-
-  r = redis.StrictRedis(host=os.getenv('WERCKER_REDIS_HOST', 'localhost'),
-      port= 6379, db=0)
-  data = r.lrange("clouds", 0, -1)
-  print data
+  data = app.redis.lrange("clouds", 0, -1)
   resp = Response(json.dumps(data), status=200, mimetype='application/json')
   return resp
 

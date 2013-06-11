@@ -8,15 +8,13 @@ import json
 class CloudTestCase(unittest.TestCase):
 
   def setUp(self):
-    r = redis.StrictRedis(host=os.getenv('WERCKER_REDIS_HOST', 'localhost'), port=6379, db=0)
-    r.rpush('clouds','Altocumulus')
-    r.rpush('clouds','Altostratus')
-    r.rpush('clouds','Cumulonimbus')
-    r.rpush('clouds','Nimbostratus')
+    app.redis.rpush('clouds','Altocumulus')
+    app.redis.rpush('clouds','Altostratus')
+    app.redis.rpush('clouds','Cumulonimbus')
+    app.redis.rpush('clouds','Nimbostratus')
 
   def tearDown(self):
-    r = redis.StrictRedis(host=os.getenv('WERCKER_REDIS_HOST', 'localhost'), port=6379, db=0)
-    r.flushdb()
+    app.redis.flushdb()
 
   def test_index(self):
     tester = app.test_client(self)
